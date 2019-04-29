@@ -3,6 +3,8 @@ package com.store.user.controller;
 import com.store.user.exception.UserNotFoundException;
 import com.store.user.jpa.entity.User;
 import com.store.user.model.request.UserRequest;
+import com.store.user.model.response.UserResponse;
+import com.store.user.service.OrderClient;
 import com.store.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    OrderClient orderProxy;
+
 
     @PostMapping("/users")
     public ResponseEntity insertUser(@RequestBody UserRequest userRequest) {
@@ -40,8 +46,13 @@ public class UserController {
             log.error("User ID not found ");
             throw new UserNotFoundException("User Not Found");
         }
+
+        Long orders=orderProxy.getOrders(id);
+
+        UserResponse userResponse=new UserResponse(user.get(),orders);
+
         log.info(String.format("Fetched User with id: %d ", id));
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(userResponse);
 
     }
 
