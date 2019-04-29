@@ -14,4 +14,9 @@ spring:
   flyway:
     enabled: true
     validate-on-migrate: true
+  application:
+    name: User
+Order:
+  ribbon:
+    listOfServers: ${ORDER_SERVER_LIST:http://localhost:9001/}
 

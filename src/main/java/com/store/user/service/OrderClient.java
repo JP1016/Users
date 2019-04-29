@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-@FeignClient(value = "jplaceholder", url = "http://localhost:9001/")
+@FeignClient(name = "Order")
 public interface OrderClient {
     @RequestMapping(method = RequestMethod.GET, value = "api/orders/user/{id}")
     Long getOrders(@PathVariable(value = "id") Long id);

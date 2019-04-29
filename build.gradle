@@ -40,6 +40,7 @@ dependencies {
     testCompile('org.mockito:mockito-junit-jupiter:2.18.3')
 
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
 
 
 }
