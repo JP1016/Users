@@ -43,6 +43,10 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
 
 
+    //Spring Cloud Stream
+    implementation 'org.springframework.cloud:spring-cloud-stream'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-stream-rabbit', version: '2.1.2.RELEASE'
+
 }
 
 

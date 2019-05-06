@@ -2,6 +2,7 @@ package com.store.user;
 
 import com.store.user.jpa.entity.User;
 import com.store.user.jpa.repository.UserRepository;
+import com.store.user.service.OrderClient;
 import com.store.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,6 +31,8 @@ public class CatalogManagementTests {
     @Spy
     private UserRepository userRepository;
 
+    @Spy
+    private OrderClient orderClient;
 
     @BeforeEach
     public void setMockOutput() {
@@ -43,8 +46,11 @@ public class CatalogManagementTests {
         userList.add(user1);
         userList.add(user2);
 
+
+
         Mockito.lenient().when(userRepository.findAll()).thenReturn(userList);
         Mockito.lenient().when(userRepository.findById(2L)).thenReturn(Optional.of(user2));
+        Mockito.lenient().when(orderClient.getOrders(1L)).thenReturn(2L);
 
     }
 
@@ -58,6 +64,10 @@ public class CatalogManagementTests {
         assertEquals("Hunt", userService.getUserById(2L).get().getLastName());
         assertEquals(Date.from(LocalDate.of(2015, 3, 2).atStartOfDay(defaultZoneId).toInstant()), userService.getUserById(2L).get().getDob());
         assertEquals(2,userRepository.findAll().size());
+
+        assertEquals(Optional.of(2L),orderClient.getOrders(1L));
+
+
 
     }
 
