@@ -1,5 +1,6 @@
 server:
   port: 9002
+  orderUrl: ${ORDER_URL:orders:9001}
 spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
